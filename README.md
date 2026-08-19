@@ -1,2 +1,2 @@
 # tehnesia
-Tes jjual teh
+Tes jual teh
