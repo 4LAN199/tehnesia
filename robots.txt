@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://4LAN199.github.io/tehnesia/sitemap.xml
