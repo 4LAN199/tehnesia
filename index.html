@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Tehnesia</title>
+<style>
+body {font-family: Arial; background:#f5f5f5; margin:0;}
+header {background:#2e7d32; color:white; padding:15px; text-align:center;}
+.search-bar {padding:10px; background:white; position:sticky; top:0;}
+.search-bar input {width:100%; padding:10px; border-radius:20px; border:1px solid #ccc;}
+.container {padding:15px;}
+.grid {display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:15px;}
+.card {background:white; border-radius:12px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); position:relative;}
+.card img {width:100%; height:140px; object-fit:cover;}
+.card-body {padding:10px;}
+.title {font-weight:bold; font-size:14px;}
+.desc {font-size:12px; color:#555;}
+.price {color:#d32f2f; font-weight:bold; margin:5px 0;}
+.qty {display:flex; justify-content:center; align-items:center; gap:10px; margin-top:5px;}
+.qty button {width:30px; height:30px; border:none; background:#ddd; border-radius:5px; cursor:pointer;}
+.topping {font-size:12px; margin-top:5px;}
+.bottom-cart {position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #ccc; padding:10px; display:flex; justify-content:space-between; align-items:center;}
+
+/* ANIMASI TERBANG */
+.fly {
+position:fixed;
+z-index:9999;
+width:40px;
+height:40px;
+border-radius:50%;
+pointer-events:none;
+transition:all 0.7s ease-in-out;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Tehnesia 🍵</h1>
+<p>Teh Teduh Yang Menyehatkan</p>
+</header>
+
+<div class="search-bar">
+<input type="text" placeholder="Cari minuman...">
+</div>
+
+<div class="container">
+<div class="grid">
+
+<div class="card">
+<img src="https://www.justonecookbook.com/wp-content/uploads/2025/12/Matcha-Latte-4589-III-800x1200.jpg">
+<div class="card-body">
+<div class="title">Matcha Latte</div>
+<div class="desc">Matcha creamy premium</div>
+<div class="price">Rp 35.000</div>
+<div class="topping">
+<label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
+<label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
+</div>
+<div class="qty">
+<button onclick="changeQty('Matcha Latte',35000,-1,this)">-</button>
+<span id="qty-Matcha Latte">0</span>
+<button onclick="changeQty('Matcha Latte',35000,1,this)">+</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,f_auto,q_auto:best,w_640/v1634025439/01gctzbxza2e058qq2p8sf2nv1.jpg">
+<div class="card-body">
+<div class="title">Thai Tea</div>
+<div class="desc">Creamy khas Thailand</div>
+<div class="price">Rp 28.000</div>
+<div class="topping">
+<label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
+<label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
+</div>
+<div class="qty">
+<button onclick="changeQty('Thai Tea',28000,-1,this)">-</button>
+<span id="qty-Thai Tea">0</span>
+<button onclick="changeQty('Thai Tea',28000,1,this)">+</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2015/08/Matcha-Tea-4-1024x1536.jpg">
+<div class="card-body">
+<div class="title">Green Tea</div>
+<div class="desc">Segar & sehat</div>
+<div class="price">Rp 25.000</div>
+<div class="topping">
+<label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
+<label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
+</div>
+<div class="qty">
+<button onclick="changeQty('Green Tea',25000,-1,this)">-</button>
+<span id="qty-Green Tea">0</span>
+<button onclick="changeQty('Green Tea',25000,1,this)">+</button>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="bottom-cart" id="cartBox">
+<div>🛒 <span id="count">0</span> item</div>
+<div>Total: Rp <span id="total">0</span></div>
+<button onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+let cart = {};
+
+function getToppings(btn){
+    const card = btn.closest('.card');
+    const checks = card.querySelectorAll('input[type=checkbox]:checked');
+    let toppings = [];
+    checks.forEach(c => toppings.push(c.value));
+    return toppings;
+}
+
+function animateToCart(img, btn){
+    const rect = img.getBoundingClientRect();
+    const cart = document.getElementById('cartBox').getBoundingClientRect();
+
+    const clone = img.cloneNode(true);
+    clone.classList.add('fly');
+    clone.style.left = rect.left + 'px';
+    clone.style.top = rect.top + 'px';
+
+    document.body.appendChild(clone);
+
+    setTimeout(()=>{
+        clone.style.left = cart.left + 'px';
+        clone.style.top = cart.top + 'px';
+        clone.style.opacity = 0;
+        clone.style.transform = 'scale(0.3)';
+    },10);
+
+    setTimeout(()=> clone.remove(),700);
+}
+
+function changeQty(nama, harga, delta, btn){
+    const toppings = getToppings(btn);
+    const key = nama + '|' + toppings.join(',');
+
+    if(delta > 0){
+        const img = btn.closest('.card').querySelector('img');
+        animateToCart(img, btn);
+    }
+
+    if(!cart[key]) cart[key] = {nama, harga, qty:0, toppings};
+
+    cart[key].qty += delta;
+    if(cart[key].qty <= 0) delete cart[key];
+    renderCart();
+}
+
+function renderCart(){
+    let total = 0;
+    let count = 0;
+
+    document.querySelectorAll('[id^="qty-"]').forEach(el => el.innerText = 0);
+
+    for(let key in cart){
+        let item = cart[key];
+        let toppingCost = item.toppings.length * 3000;
+        total += (item.harga + toppingCost) * item.qty;
+        count += item.qty;
+        document.getElementById('qty-'+item.nama).innerText += item.qty;
+    }
+
+    document.getElementById('total').innerText = total.toLocaleString();
+    document.getElementById('count').innerText = count;
+}
+
+function checkout(){
+    if(Object.keys(cart).length === 0){
+        alert('Keranjang kosong!');
+        return;
+    }
+
+    let pesan = "Halo Tehnesia! Saya ingin pesan:%0A";
+    let total = 0;
+
+    for(let key in cart){
+        let item = cart[key];
+        let toppingText = item.toppings.length ? ' + ' + item.toppings.join(', ') : '';
+        let toppingCost = item.toppings.length * 3000;
+        let subtotal = (item.harga + toppingCost) * item.qty;
+
+        pesan += `- ${item.nama}${toppingText} x${item.qty} = Rp ${subtotal.toLocaleString()}%0A`;
+        total += subtotal;
+    }
+
+    pesan += `%0ATotal: Rp ${total.toLocaleString()}`;
+
+    let nomor = "6285704076736";
+    let url = `https://wa.me/${nomor}?text=${pesan}`;
+
+    window.open(url, '_blank');
+}
+</script>
+
+</body>
+</html>
