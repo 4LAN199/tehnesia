@@ -228,6 +228,7 @@ header p {
     border-radius: 50%;
     object-fit: cover;
     pointer-events: none;
+
     transition:
         left 0.7s ease-in-out,
         top 0.7s ease-in-out,
@@ -242,6 +243,217 @@ header p {
     padding: 50px 20px;
     color: #777;
     display: none;
+}
+
+/* =========================
+   CHECKOUT MODAL
+========================= */
+
+.checkout-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 10000;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.checkout-modal.show {
+    display: block;
+}
+
+.checkout-content {
+    background: white;
+    max-width: 650px;
+    margin: 30px auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+
+.checkout-header {
+    background: #2e7d32;
+    color: white;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkout-header h2 {
+    margin: 0;
+}
+
+.close-checkout {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.checkout-body {
+    padding: 15px;
+}
+
+.checkout-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.checkout-item-info {
+    flex: 1;
+}
+
+.checkout-item-name {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.checkout-item-topping {
+    font-size: 12px;
+    color: #777;
+    margin-top: 4px;
+}
+
+.checkout-item-price {
+    color: #d32f2f;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.checkout-controls {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.checkout-controls button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.checkout-controls .minus,
+.checkout-controls .plus {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.checkout-controls .delete {
+    background: #ffebee;
+    color: #d32f2f;
+    padding: 0 10px;
+    width: auto;
+}
+
+.checkout-summary {
+    background: #f5f5f5;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.checkout-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    color: #d32f2f;
+}
+
+.checkout-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.checkout-actions button {
+    flex: 1;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-back {
+    background: #eee;
+    color: #333;
+}
+
+.btn-confirm {
+    background: #2e7d32;
+    color: white;
+}
+
+.checkout-empty {
+    text-align: center;
+    padding: 35px 15px;
+    color: #777;
+}
+
+/* =========================
+   KONFIRMASI
+========================= */
+
+.confirmation-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #f5f5f5;
+    z-index: 11000;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.confirmation-screen.show {
+    display: block;
+}
+
+.confirmation-box {
+    max-width: 600px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+}
+
+.confirmation-icon {
+    font-size: 60px;
+}
+
+.confirmation-box h2 {
+    color: #2e7d32;
+}
+
+.confirmation-box p {
+    color: #666;
+}
+
+.confirmation-order {
+    text-align: left;
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.confirmation-total {
+    font-weight: bold;
+    color: #d32f2f;
+    font-size: 18px;
 }
 
 /* MOBILE */
@@ -285,6 +497,24 @@ header p {
     .checkout-btn {
         padding: 9px 13px;
     }
+
+    .checkout-modal {
+        padding: 0;
+    }
+
+    .checkout-content {
+        min-height: 100vh;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .confirmation-screen {
+        padding: 10px;
+    }
+
+    .confirmation-box {
+        margin: 20px auto;
+    }
 }
 
 </style>
@@ -310,595 +540,975 @@ header p {
 
 <div class="container">
 
-    <div class="grid" id="productGrid">
+<div class="grid" id="productGrid">
 
-        <!-- 1. THAI TEA -->
+<!-- 1 THAI TEA -->
 
-        <div class="card" data-search="thai tea creamy khas thailand">
+<div class="card" data-search="thai tea creamy khas thailand">
 
-            <img
-                src="https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,f_auto,q_auto:best,w_640/v1634025439/01gctzbxza2e058qq2p8sf2nv1.jpg"
-                alt="Thai Tea Tehnesia"
-                loading="lazy">
+<img
+src="https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,f_auto,q_auto:best,w_640/v1634025439/01gctzbxza2e058qq2p8sf2nv1.jpg"
+alt="Thai Tea Tehnesia"
+loading="lazy">
 
-            <div class="card-body">
+<div class="card-body">
 
-                <div class="title">Thai Tea</div>
+<div class="title">Thai Tea</div>
 
-                <div class="desc">
-                    Creamy khas Thailand dengan rasa teh yang kuat dan manis.
-                </div>
+<div class="desc">
+Creamy khas Thailand dengan rasa teh yang kuat dan manis.
+</div>
 
-                <div class="price">
-                    Rp 28.000
-                </div>
+<div class="price">
+Rp 28.000
+</div>
 
-                <div class="topping">
-                    <label>
-                        <input type="checkbox" value="Boba">
-                        Boba (+3k)
-                    </label><br>
+<div class="topping">
 
-                    <label>
-                        <input type="checkbox" value="Jelly">
-                        Jelly (+3k)
-                    </label>
-                </div>
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
 
-                <div class="qty">
-                    <button onclick="changeQty('Thai Tea',28000,-1,this)">−</button>
-                    <span id="qty-Thai Tea">0</span>
-                    <button onclick="changeQty('Thai Tea',28000,1,this)">+</button>
-                </div>
+<br>
 
-            </div>
-        </div>
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
 
+</div>
 
-        <!-- 2. GREEN TEA -->
+<div class="qty">
 
-        <div class="card" data-search="green tea teh hijau segar sehat">
+<button onclick="changeQty('Thai Tea',28000,-1,this)">
+−
+</button>
 
-            <img
-                src="https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2015/08/Matcha-Tea-4-1024x1536.jpg"
-                alt="Green Tea Tehnesia"
-                loading="lazy">
+<span id="qty-Thai Tea">0</span>
 
-            <div class="card-body">
+<button onclick="changeQty('Thai Tea',28000,1,this)">
++
+</button>
 
-                <div class="title">Green Tea</div>
+</div>
 
-                <div class="desc">
-                    Teh hijau segar dengan karakter ringan dan menyegarkan.
-                </div>
+</div>
+</div>
 
-                <div class="price">
-                    Rp 25.000
-                </div>
 
-                <div class="topping">
-                    <label>
-                        <input type="checkbox" value="Boba">
-                        Boba (+3k)
-                    </label><br>
+<!-- 2 GREEN TEA -->
 
-                    <label>
-                        <input type="checkbox" value="Jelly">
-                        Jelly (+3k)
-                    </label>
-                </div>
+<div class="card" data-search="green tea teh hijau segar sehat">
 
-                <div class="qty">
-                    <button onclick="changeQty('Green Tea',25000,-1,this)">−</button>
-                    <span id="qty-Green Tea">0</span>
-                    <button onclick="changeQty('Green Tea',25000,1,this)">+</button>
-                </div>
+<img
+src="https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2015/08/Matcha-Tea-4-1024x1536.jpg"
+alt="Green Tea Tehnesia"
+loading="lazy">
 
-            </div>
-        </div>
+<div class="card-body">
 
+<div class="title">Green Tea</div>
 
-        <!-- 3. MATCHA LATTE -->
+<div class="desc">
+Teh hijau segar dengan karakter ringan dan menyegarkan.
+</div>
 
-        <div class="card" data-search="matcha latte creamy premium">
+<div class="price">
+Rp 25.000
+</div>
 
-            <img
-                src="https://www.justonecookbook.com/wp-content/uploads/2025/12/Matcha-Latte-4589-III-800x1200.jpg"
-                alt="Matcha Latte Tehnesia"
-                loading="lazy">
+<div class="topping">
 
-            <div class="card-body">
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
 
-                <div class="title">Matcha Latte</div>
+<br>
 
-                <div class="desc">
-                    Matcha premium creamy dengan rasa earthy yang khas.
-                </div>
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
 
-                <div class="price">
-                    Rp 35.000
-                </div>
+</div>
 
-                <div class="topping">
-                    <label>
-                        <input type="checkbox" value="Boba">
-                        Boba (+3k)
-                    </label><br>
+<div class="qty">
 
-                    <label>
-                        <input type="checkbox" value="Jelly">
-                        Jelly (+3k)
-                    </label>
-                </div>
+<button onclick="changeQty('Green Tea',25000,-1,this)">
+−
+</button>
 
-                <div class="qty">
-                    <button onclick="changeQty('Matcha Latte',35000,-1,this)">−</button>
-                    <span id="qty-Matcha Latte">0</span>
-                    <button onclick="changeQty('Matcha Latte',35000,1,this)">+</button>
-                </div>
+<span id="qty-Green Tea">0</span>
 
-            </div>
-        </div>
+<button onclick="changeQty('Green Tea',25000,1,this)">
++
+</button>
 
+</div>
 
-        <!-- 4. MILK TEA -->
+</div>
+</div>
 
-        <div class="card" data-search="milk tea susu teh creamy">
 
-            <img
-                src="https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=800&q=80"
-                alt="Milk Tea Tehnesia"
-                loading="lazy">
+<!-- 3 MATCHA LATTE -->
 
-            <div class="card-body">
+<div class="card" data-search="matcha latte creamy premium">
 
-                <div class="title">Milk Tea</div>
+<img
+src="https://www.justonecookbook.com/wp-content/uploads/2025/12/Matcha-Latte-4589-III-800x1200.jpg"
+alt="Matcha Latte Tehnesia"
+loading="lazy">
 
-                <div class="desc">
-                    Perpaduan teh dan susu creamy yang lembut.
-                </div>
+<div class="card-body">
 
-                <div class="price">
-                    Rp 30.000
-                </div>
+<div class="title">Matcha Latte</div>
 
-                <div class="topping">
-                    <label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
-                    <label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
-                </div>
+<div class="desc">
+Matcha premium creamy dengan rasa earthy yang khas.
+</div>
 
-                <div class="qty">
-                    <button onclick="changeQty('Milk Tea',30000,-1,this)">−</button>
-                    <span id="qty-Milk Tea">0</span>
-                    <button onclick="changeQty('Milk Tea',30000,1,this)">+</button>
-                </div>
+<div class="price">
+Rp 35.000
+</div>
 
-            </div>
-        </div>
+<div class="topping">
 
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
 
-        <!-- 5. BROWN SUGAR MILK TEA -->
+<br>
 
-        <div class="card" data-search="brown sugar milk tea gula aren susu">
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
 
-            <img
-                src="https://www.foxyfolksy.com/wp-content/uploads/2020/06/brown-sugar-milk-tea.jpg"
-                alt="Brown Sugar Milk Tea Tehnesia"
-                loading="lazy">
+</div>
 
-            <div class="card-body">
+<div class="qty">
 
-                <div class="title">Brown Sugar Milk Tea</div>
+<button onclick="changeQty('Matcha Latte',35000,-1,this)">
+−
+</button>
 
-                <div class="desc">
-                    Susu creamy dengan manis karamel gula aren.
-                </div>
+<span id="qty-Matcha Latte">0</span>
 
-                <div class="price">
-                    Rp 38.000
-                </div>
+<button onclick="changeQty('Matcha Latte',35000,1,this)">
++
+</button>
 
-                <div class="topping">
-                    <label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
-                    <label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
-                </div>
+</div>
 
-                <div class="qty">
-                    <button onclick="changeQty('Brown Sugar Milk Tea',38000,-1,this)">−</button>
-                    <span id="qty-Brown Sugar Milk Tea">0</span>
-                    <button onclick="changeQty('Brown Sugar Milk Tea',38000,1,this)">+</button>
-                </div>
+</div>
+</div>
 
-            </div>
-        </div>
 
+<!-- 4 MILK TEA -->
 
-        <!-- 6. TARO MILK TEA -->
+<div class="card" data-search="milk tea susu teh creamy">
 
-        <div class="card" data-search="taro milk tea talas">
+<img
+src="https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=800&q=80"
+alt="Milk Tea Tehnesia"
+loading="lazy">
 
-            <img
-                src="https://theoregondietitian.com/wp-content/uploads/2022/04/TaroMilkTea1-1200-x-1600-1152x1536.jpg"
-                alt="Taro Milk Tea Tehnesia"
-                loading="lazy">
+<div class="card-body">
 
-            <div class="card-body">
+<div class="title">Milk Tea</div>
 
-                <div class="title">Taro Milk Tea</div>
+<div class="desc">
+Perpaduan teh dan susu creamy yang lembut.
+</div>
 
-                <div class="desc">
-                    Rasa talas lembut dengan tekstur creamy.
-                </div>
+<div class="price">
+Rp 30.000
+</div>
 
-                <div class="price">
-                    Rp 32.000
-                </div>
+<div class="topping">
 
-                <div class="topping">
-                    <label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
-                    <label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
-                </div>
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
 
-                <div class="qty">
-                    <button onclick="changeQty('Taro Milk Tea',32000,-1,this)">−</button>
-                    <span id="qty-Taro Milk Tea">0</span>
-                    <button onclick="changeQty('Taro Milk Tea',32000,1,this)">+</button>
-                </div>
+<br>
 
-            </div>
-        </div>
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
 
+</div>
 
-        <!-- 7. JASMINE MILK TEA -->
+<div class="qty">
 
-        <div class="card" data-search="jasmine milk tea melati">
+<button onclick="changeQty('Milk Tea',30000,-1,this)">
+−
+</button>
 
-            <img
-                src="https://www.wholekitchensink.com/wp-content/uploads/2023/03/Jasmine-Milk-Tea-10-768x1152.jpg"
-                alt="Jasmine Milk Tea Tehnesia"
-                loading="lazy">
+<span id="qty-Milk Tea">0</span>
 
-            <div class="card-body">
+<button onclick="changeQty('Milk Tea',30000,1,this)">
++
+</button>
 
-                <div class="title">Jasmine Milk Tea</div>
+</div>
 
-                <div class="desc">
-                    Aroma bunga melati yang harum dengan susu lembut.
-                </div>
+</div>
+</div>
 
-                <div class="price">
-                    Rp 30.000
-                </div>
 
-                <div class="topping">
-                    <label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
-                    <label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
-                </div>
+<!-- 5 BROWN SUGAR -->
 
-                <div class="qty">
-                    <button onclick="changeQty('Jasmine Milk Tea',30000,-1,this)">−</button>
-                    <span id="qty-Jasmine Milk Tea">0</span>
-                    <button onclick="changeQty('Jasmine Milk Tea',30000,1,this)">+</button>
-                </div>
+<div class="card" data-search="brown sugar milk tea gula aren susu">
 
-            </div>
-        </div>
+<img
+src="https://www.foxyfolksy.com/wp-content/uploads/2020/06/brown-sugar-milk-tea.jpg"
+alt="Brown Sugar Milk Tea Tehnesia"
+loading="lazy">
 
+<div class="card-body">
 
-        <!-- 8. OOLONG MILK TEA -->
+<div class="title">Brown Sugar Milk Tea</div>
 
-        <div class="card" data-search="oolong milk tea">
+<div class="desc">
+Susu creamy dengan manis karamel gula aren.
+</div>
 
-            <img
-                src="https://myveganminimalist.com/wp-content/uploads/2022/05/Oolong-Bubble-Milk-Tea-Boba-6-1.jpg"
-                alt="Oolong Milk Tea Tehnesia"
-                loading="lazy">
+<div class="price">
+Rp 38.000
+</div>
 
-            <div class="card-body">
+<div class="topping">
 
-                <div class="title">Oolong Milk Tea</div>
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
 
-                <div class="desc">
-                    Teh oolong dengan aroma panggang dan susu creamy.
-                </div>
+<br>
 
-                <div class="price">
-                    Rp 33.000
-                </div>
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
 
-                <div class="topping">
-                    <label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
-                    <label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
-                </div>
+</div>
 
-                <div class="qty">
-                    <button onclick="changeQty('Oolong Milk Tea',33000,-1,this)">−</button>
-                    <span id="qty-Oolong Milk Tea">0</span>
-                    <button onclick="changeQty('Oolong Milk Tea',33000,1,this)">+</button>
-                </div>
+<div class="qty">
 
-            </div>
-        </div>
+<button onclick="changeQty('Brown Sugar Milk Tea',38000,-1,this)">
+−
+</button>
 
+<span id="qty-Brown Sugar Milk Tea">0</span>
 
-        <!-- 9. BLACK TEA -->
+<button onclick="changeQty('Brown Sugar Milk Tea',38000,1,this)">
++
+</button>
 
-        <div class="card" data-search="black tea teh hitam">
+</div>
 
-            <img
-                src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80"
-                alt="Black Tea Tehnesia"
-                loading="lazy">
+</div>
+</div>
 
-            <div class="card-body">
 
-                <div class="title">Black Tea</div>
+<!-- 6 TARO -->
 
-                <div class="desc">
-                    Teh hitam dengan rasa kuat dan aroma khas.
-                </div>
+<div class="card" data-search="taro milk tea talas">
 
-                <div class="price">
-                    Rp 25.000
-                </div>
+<img
+src="https://theoregondietitian.com/wp-content/uploads/2022/04/TaroMilkTea1-1200-x-1600-1152x1536.jpg"
+alt="Taro Milk Tea Tehnesia"
+loading="lazy">
 
-                <div class="topping">
-                    <label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
-                    <label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
-                </div>
+<div class="card-body">
 
-                <div class="qty">
-                    <button onclick="changeQty('Black Tea',25000,-1,this)">−</button>
-                    <span id="qty-Black Tea">0</span>
-                    <button onclick="changeQty('Black Tea',25000,1,this)">+</button>
-                </div>
+<div class="title">Taro Milk Tea</div>
 
-            </div>
-        </div>
+<div class="desc">
+Rasa talas lembut dengan tekstur creamy.
+</div>
 
+<div class="price">
+Rp 32.000
+</div>
 
-        <!-- 10. LEMON TEA -->
+<div class="topping">
 
-        <div class="card" data-search="lemon tea lemon segar">
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
 
-            <img
-                src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&q=80"
-                alt="Lemon Tea Tehnesia"
-                loading="lazy">
+<br>
 
-            <div class="card-body">
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
 
-                <div class="title">Lemon Tea</div>
+</div>
 
-                <div class="desc">
-                    Teh segar dengan sentuhan lemon yang asam dan menyegarkan.
-                </div>
+<div class="qty">
 
-                <div class="price">
-                    Rp 27.000
-                </div>
+<button onclick="changeQty('Taro Milk Tea',32000,-1,this)">
+−
+</button>
 
-                <div class="topping">
-                    <label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
-                    <label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
-                </div>
+<span id="qty-Taro Milk Tea">0</span>
 
-                <div class="qty">
-                    <button onclick="changeQty('Lemon Tea',27000,-1,this)">−</button>
-                    <span id="qty-Lemon Tea">0</span>
-                    <button onclick="changeQty('Lemon Tea',27000,1,this)">+</button>
-                </div>
+<button onclick="changeQty('Taro Milk Tea',32000,1,this)">
++
+</button>
 
-            </div>
-        </div>
+</div>
 
+</div>
+</div>
 
-        <!-- 11. LYCHEE TEA -->
 
-        <div class="card" data-search="lychee tea leci">
+<!-- 7 JASMINE -->
 
-            <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4gPvj6KYpgnuOLHNrw4dCK9rHvkY9wG2fxU_Z_Ed24Q&s=10"
-                alt="Lychee Tea Tehnesia"
-                loading="lazy">
+<div class="card" data-search="jasmine milk tea melati">
 
-            <div class="card-body">
+<img
+src="https://www.wholekitchensink.com/wp-content/uploads/2023/03/Jasmine-Milk-Tea-10-768x1152.jpg"
+alt="Jasmine Milk Tea Tehnesia"
+loading="lazy">
 
-                <div class="title">Lychee Tea</div>
+<div class="card-body">
 
-                <div class="desc">
-                    Teh fruity dengan aroma dan rasa leci yang manis.
-                </div>
+<div class="title">Jasmine Milk Tea</div>
 
-                <div class="price">
-                    Rp 29.000
-                </div>
+<div class="desc">
+Aroma bunga melati yang harum dengan susu lembut.
+</div>
 
-                <div class="topping">
-                    <label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
-                    <label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
-                </div>
+<div class="price">
+Rp 30.000
+</div>
 
-                <div class="qty">
-                    <button onclick="changeQty('Lychee Tea',29000,-1,this)">−</button>
-                    <span id="qty-Lychee Tea">0</span>
-                    <button onclick="changeQty('Lychee Tea',29000,1,this)">+</button>
-                </div>
+<div class="topping">
 
-            </div>
-        </div>
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
 
+<br>
 
-        <!-- 12. MANGO TEA -->
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
 
-        <div class="card" data-search="mango tea mangga">
+</div>
 
-            <img
-                src="https://takestwoeggs.com/wp-content/uploads/2021/10/Mango-Green-Tea-Takestwoeggs-sq.jpg"
-                alt="Mango Tea Tehnesia"
-                loading="lazy">
+<div class="qty">
 
-            <div class="card-body">
+<button onclick="changeQty('Jasmine Milk Tea',30000,-1,this)">
+−
+</button>
 
-                <div class="title">Mango Tea</div>
+<span id="qty-Jasmine Milk Tea">0</span>
 
-                <div class="desc">
-                    Teh dengan rasa mangga tropis yang manis dan segar.
-                </div>
+<button onclick="changeQty('Jasmine Milk Tea',30000,1,this)">
++
+</button>
 
-                <div class="price">
-                    Rp 30.000
-                </div>
+</div>
 
-                <div class="topping">
-                    <label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
-                    <label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
-                </div>
+</div>
+</div>
 
-                <div class="qty">
-                    <button onclick="changeQty('Mango Tea',30000,-1,this)">−</button>
-                    <span id="qty-Mango Tea">0</span>
-                    <button onclick="changeQty('Mango Tea',30000,1,this)">+</button>
-                </div>
 
-            </div>
-        </div>
+<!-- 8 OOLONG -->
 
+<div class="card" data-search="oolong milk tea">
 
-        <!-- 13. STRAWBERRY TEA -->
+<img
+src="https://myveganminimalist.com/wp-content/uploads/2022/05/Oolong-Bubble-Milk-Tea-Boba-6-1.jpg"
+alt="Oolong Milk Tea Tehnesia"
+loading="lazy">
 
-        <div class="card" data-search="strawberry tea stroberi">
+<div class="card-body">
 
-            <img
-                src="https://letthebakingbegin.com/wp-content/uploads/2016/05/Strawberry-Iced-Tea-refreshing-drink-made-of-fresh-strawberries-and-brewed-tea-Let-the-Baking-Begin_-3.jpg"
-                alt="Strawberry Tea Tehnesia"
-                loading="lazy">
+<div class="title">Oolong Milk Tea</div>
 
-            <div class="card-body">
+<div class="desc">
+Teh oolong dengan aroma panggang dan susu creamy.
+</div>
 
-                <div class="title">Strawberry Tea</div>
+<div class="price">
+Rp 33.000
+</div>
 
-                <div class="desc">
-                    Perpaduan teh dan stroberi dengan rasa fruity.
-                </div>
+<div class="topping">
 
-                <div class="price">
-                    Rp 30.000
-                </div>
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
 
-                <div class="topping">
-                    <label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
-                    <label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
-                </div>
+<br>
 
-                <div class="qty">
-                    <button onclick="changeQty('Strawberry Tea',30000,-1,this)">−</button>
-                    <span id="qty-Strawberry Tea">0</span>
-                    <button onclick="changeQty('Strawberry Tea',30000,1,this)">+</button>
-                </div>
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
 
-            </div>
-        </div>
+</div>
 
+<div class="qty">
 
-        <!-- 14. HONEY TEA -->
+<button onclick="changeQty('Oolong Milk Tea',33000,-1,this)">
+−
+</button>
 
-        <div class="card" data-search="honey tea madu">
+<span id="qty-Oolong Milk Tea">0</span>
 
-            <img
-                src="http://bulgarianteacompany.com/wp-content/uploads/2024/12/polzite-na-meda-1024x576.png"
-                alt="Honey Tea Tehnesia"
-                loading="lazy">
+<button onclick="changeQty('Oolong Milk Tea',33000,1,this)">
++
+</button>
 
-            <div class="card-body">
+</div>
 
-                <div class="title">Honey Tea</div>
+</div>
+</div>
 
-                <div class="desc">
-                    Teh lembut dengan manis alami madu.
-                </div>
 
-                <div class="price">
-                    Rp 28.000
-                </div>
+<!-- 9 BLACK TEA -->
 
-                <div class="topping">
-                    <label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
-                    <label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
-                </div>
+<div class="card" data-search="black tea teh hitam">
 
-                <div class="qty">
-                    <button onclick="changeQty('Honey Tea',28000,-1,this)">−</button>
-                    <span id="qty-Honey Tea">0</span>
-                    <button onclick="changeQty('Honey Tea',28000,1,this)">+</button>
-                </div>
+<img
+src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80"
+alt="Black Tea Tehnesia"
+loading="lazy">
 
-            </div>
-        </div>
+<div class="card-body">
 
+<div class="title">Black Tea</div>
 
-        <!-- 15. WINTERMELON TEA -->
+<div class="desc">
+Teh hitam dengan rasa kuat dan aroma khas.
+</div>
 
-        <div class="card" data-search="wintermelon tea semangka kundur">
+<div class="price">
+Rp 25.000
+</div>
 
-            <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgB89fgiNC_EHb8ltM9cxKv2FYhQMXwFvrHS52__Q7Hw&s=10"
-                alt="Wintermelon Tea Tehnesia"
-                loading="lazy">
+<div class="topping">
 
-            <div class="card-body">
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
 
-                <div class="title">Wintermelon Tea</div>
+<br>
 
-                <div class="desc">
-                    Rasa manis ringan dan menyegarkan dengan karakter wintermelon.
-                </div>
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
 
-                <div class="price">
-                    Rp 28.000
-                </div>
+</div>
 
-                <div class="topping">
-                    <label><input type="checkbox" value="Boba"> Boba (+3k)</label><br>
-                    <label><input type="checkbox" value="Jelly"> Jelly (+3k)</label>
-                </div>
+<div class="qty">
 
-                <div class="qty">
-                    <button onclick="changeQty('Wintermelon Tea',28000,-1,this)">−</button>
-                    <span id="qty-Wintermelon Tea">0</span>
-                    <button onclick="changeQty('Wintermelon Tea',28000,1,this)">+</button>
-                </div>
+<button onclick="changeQty('Black Tea',25000,-1,this)">
+−
+</button>
 
-            </div>
-        </div>
+<span id="qty-Black Tea">0</span>
 
-    </div>
+<button onclick="changeQty('Black Tea',25000,1,this)">
++
+</button>
 
-    <div class="no-result" id="noResult">
-        😢 Produk tidak ditemukan.
-        <br>
-        Coba cari dengan kata lain.
-    </div>
+</div>
+
+</div>
+</div>
+
+
+<!-- 10 LEMON TEA -->
+
+<div class="card" data-search="lemon tea lemon segar">
+
+<img
+src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&q=80"
+alt="Lemon Tea Tehnesia"
+loading="lazy">
+
+<div class="card-body">
+
+<div class="title">Lemon Tea</div>
+
+<div class="desc">
+Teh segar dengan sentuhan lemon yang asam dan menyegarkan.
+</div>
+
+<div class="price">
+Rp 27.000
+</div>
+
+<div class="topping">
+
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
+
+<br>
+
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
+
+</div>
+
+<div class="qty">
+
+<button onclick="changeQty('Lemon Tea',27000,-1,this)">
+−
+</button>
+
+<span id="qty-Lemon Tea">0</span>
+
+<button onclick="changeQty('Lemon Tea',27000,1,this)">
++
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- 11 LYCHEE TEA -->
+
+<div class="card" data-search="lychee tea leci">
+
+<img
+src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4gPvj6KYpgnuOLHNrw4dCK9rHvkY9wG2fxU_Z_Ed24Q&s=10"
+alt="Lychee Tea Tehnesia"
+loading="lazy">
+
+<div class="card-body">
+
+<div class="title">Lychee Tea</div>
+
+<div class="desc">
+Teh fruity dengan aroma dan rasa leci yang manis.
+</div>
+
+<div class="price">
+Rp 29.000
+</div>
+
+<div class="topping">
+
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
+
+<br>
+
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
+
+</div>
+
+<div class="qty">
+
+<button onclick="changeQty('Lychee Tea',29000,-1,this)">
+−
+</button>
+
+<span id="qty-Lychee Tea">0</span>
+
+<button onclick="changeQty('Lychee Tea',29000,1,this)">
++
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- 12 MANGO -->
+
+<div class="card" data-search="mango tea mangga">
+
+<img
+src="https://takestwoeggs.com/wp-content/uploads/2021/10/Mango-Green-Tea-Takestwoeggs-sq.jpg"
+alt="Mango Tea Tehnesia"
+loading="lazy">
+
+<div class="card-body">
+
+<div class="title">Mango Tea</div>
+
+<div class="desc">
+Teh dengan rasa mangga tropis yang manis dan segar.
+</div>
+
+<div class="price">
+Rp 30.000
+</div>
+
+<div class="topping">
+
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
+
+<br>
+
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
+
+</div>
+
+<div class="qty">
+
+<button onclick="changeQty('Mango Tea',30000,-1,this)">
+−
+</button>
+
+<span id="qty-Mango Tea">0</span>
+
+<button onclick="changeQty('Mango Tea',30000,1,this)">
++
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- 13 STRAWBERRY -->
+
+<div class="card" data-search="strawberry tea stroberi">
+
+<img
+src="https://letthebakingbegin.com/wp-content/uploads/2016/05/Strawberry-Iced-Tea-refreshing-drink-made-of-fresh-strawberries-and-brewed-tea-Let-the-Baking-Begin_-3.jpg"
+alt="Strawberry Tea Tehnesia"
+loading="lazy">
+
+<div class="card-body">
+
+<div class="title">Strawberry Tea</div>
+
+<div class="desc">
+Perpaduan teh dan stroberi dengan rasa fruity.
+</div>
+
+<div class="price">
+Rp 30.000
+</div>
+
+<div class="topping">
+
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
+
+<br>
+
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
+
+</div>
+
+<div class="qty">
+
+<button onclick="changeQty('Strawberry Tea',30000,-1,this)">
+−
+</button>
+
+<span id="qty-Strawberry Tea">0</span>
+
+<button onclick="changeQty('Strawberry Tea',30000,1,this)">
++
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- 14 HONEY -->
+
+<div class="card" data-search="honey tea madu">
+
+<img
+src="http://bulgarianteacompany.com/wp-content/uploads/2024/12/polzite-na-meda-1024x576.png"
+alt="Honey Tea Tehnesia"
+loading="lazy">
+
+<div class="card-body">
+
+<div class="title">Honey Tea</div>
+
+<div class="desc">
+Teh lembut dengan manis alami madu.
+</div>
+
+<div class="price">
+Rp 28.000
+</div>
+
+<div class="topping">
+
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
+
+<br>
+
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
+
+</div>
+
+<div class="qty">
+
+<button onclick="changeQty('Honey Tea',28000,-1,this)">
+−
+</button>
+
+<span id="qty-Honey Tea">0</span>
+
+<button onclick="changeQty('Honey Tea',28000,1,this)">
++
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- 15 WINTERMELON -->
+
+<div class="card" data-search="wintermelon tea semangka kundur">
+
+<img
+src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgB89fgiNC_EHb8ltM9cxKv2FYhQMXwFvrHS52__Q7Hw&s=10"
+alt="Wintermelon Tea Tehnesia"
+loading="lazy">
+
+<div class="card-body">
+
+<div class="title">Wintermelon Tea</div>
+
+<div class="desc">
+Rasa manis ringan dan menyegarkan dengan karakter wintermelon.
+</div>
+
+<div class="price">
+Rp 28.000
+</div>
+
+<div class="topping">
+
+<label>
+<input type="checkbox" value="Boba">
+Boba (+3k)
+</label>
+
+<br>
+
+<label>
+<input type="checkbox" value="Jelly">
+Jelly (+3k)
+</label>
+
+</div>
+
+<div class="qty">
+
+<button onclick="changeQty('Wintermelon Tea',28000,-1,this)">
+−
+</button>
+
+<span id="qty-Wintermelon Tea">0</span>
+
+<button onclick="changeQty('Wintermelon Tea',28000,1,this)">
++
+</button>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="no-result" id="noResult">
+    😢 Produk tidak ditemukan.
+    <br>
+    Coba cari dengan kata lain.
+</div>
 
 </div>
 
 
-<!-- KERANJANG -->
+<!-- KERANJANG BAWAH -->
 
 <div class="bottom-cart" id="cartBox">
 
-    <div class="cart-info">
-        🛒 <span id="count">0</span> item
-    </div>
+<div class="cart-info">
+🛒 <span id="count">0</span> item
+</div>
 
-    <div>
-        Total:
-        <strong>Rp <span id="total">0</span></strong>
-    </div>
+<div>
+Total:
+<strong>
+Rp <span id="total">0</span>
+</strong>
+</div>
 
-    <button class="checkout-btn" onclick="checkout()">
-        Checkout WhatsApp
-    </button>
+<button class="checkout-btn" onclick="checkout()">
+🛒 Checkout
+</button>
+
+</div>
+
+
+<!-- =========================
+     CHECKOUT MODAL
+========================= -->
+
+<div class="checkout-modal" id="checkoutModal">
+
+<div class="checkout-content">
+
+<div class="checkout-header">
+
+<h2>🛒 Periksa Pesanan</h2>
+
+<button
+class="close-checkout"
+onclick="closeCheckout()">
+×
+</button>
+
+</div>
+
+<div class="checkout-body">
+
+<div id="checkoutItems"></div>
+
+<div class="checkout-summary">
+
+<div class="checkout-total">
+
+<span>Total</span>
+
+<span>
+Rp <span id="checkoutTotal">0</span>
+</span>
+
+</div>
+
+</div>
+
+<div class="checkout-actions">
+
+<button
+class="btn-back"
+onclick="closeCheckout()">
+← Kembali Belanja
+</button>
+
+<button
+class="btn-confirm"
+onclick="confirmOrder()">
+✓ Konfirmasi Pesanan
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     KONFIRMASI
+========================= -->
+
+<div
+class="confirmation-screen"
+id="confirmationScreen">
+
+<div class="confirmation-box">
+
+<div class="confirmation-icon">
+✅
+</div>
+
+<h2>Pesanan Siap!</h2>
+
+<p>
+Periksa kembali pesanan kamu sebelum dikirim ke WhatsApp.
+</p>
+
+<div
+class="confirmation-order"
+id="confirmationOrder">
+</div>
+
+<div class="confirmation-total">
+
+Total:
+Rp <span id="confirmationTotal">0</span>
+
+</div>
+
+<div class="checkout-actions">
+
+<button
+class="btn-back"
+onclick="backToCheckout()">
+✏️ Edit Pesanan
+</button>
+
+<button
+class="btn-confirm"
+onclick="sendToWhatsApp()">
+📲 Kirim ke WhatsApp
+</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -944,7 +1554,7 @@ function animateToCart(img) {
     const rect =
         img.getBoundingClientRect();
 
-    const cart =
+    const cartElement =
         document.getElementById('cartBox')
         .getBoundingClientRect();
 
@@ -964,10 +1574,10 @@ function animateToCart(img) {
     setTimeout(function() {
 
         clone.style.left =
-            (cart.left + cart.width / 2) + 'px';
+            (cartElement.left + cartElement.width / 2) + 'px';
 
         clone.style.top =
-            cart.top + 'px';
+            cartElement.top + 'px';
 
         clone.style.opacity = '0';
 
@@ -1021,9 +1631,7 @@ function changeQty(nama, harga, delta, btn) {
 
 
     if (cart[key].qty <= 0) {
-
         delete cart[key];
-
     }
 
 
@@ -1038,14 +1646,8 @@ function changeQty(nama, harga, delta, btn) {
 function renderCart() {
 
     let total = 0;
-
     let count = 0;
 
-
-    /*
-       Reset quantity
-       yang tampil di setiap produk
-    */
 
     document
         .querySelectorAll('[id^="qty-"]')
@@ -1064,12 +1666,11 @@ function renderCart() {
             item.toppings.length * 3000;
 
         const subtotal =
-            (item.harga + toppingCost)
-            * item.qty;
+            (item.harga + toppingCost) *
+            item.qty;
 
 
         total += subtotal;
-
         count += item.qty;
 
 
@@ -1082,8 +1683,8 @@ function renderCart() {
         if (quantityElement) {
 
             quantityElement.innerText =
-                parseInt(quantityElement.innerText)
-                + item.qty;
+                parseInt(quantityElement.innerText) +
+                item.qty;
 
         }
 
@@ -1102,7 +1703,7 @@ function renderCart() {
 
 
 /* =========================
-   SEARCH PRODUK
+   SEARCH
 ========================= */
 
 function searchProducts() {
@@ -1134,7 +1735,6 @@ function searchProducts() {
         ) {
 
             product.style.display = '';
-
             found++;
 
         } else {
@@ -1164,18 +1764,404 @@ function searchProducts() {
 
 
 /* =========================
-   CHECKOUT WHATSAPP
+   BUKA CHECKOUT
 ========================= */
 
 function checkout() {
 
-    if (Object.keys(cart).length === 0) {
+    if (
+        Object.keys(cart).length === 0
+    ) {
 
         alert(
             'Keranjang masih kosong. Silakan pilih minuman terlebih dahulu.'
         );
 
         return;
+    }
+
+
+    renderCheckout();
+
+
+    document
+        .getElementById('checkoutModal')
+        .classList.add('show');
+
+}
+
+
+/* =========================
+   TUTUP CHECKOUT
+========================= */
+
+function closeCheckout() {
+
+    document
+        .getElementById('checkoutModal')
+        .classList.remove('show');
+
+}
+
+
+/* =========================
+   RENDER CHECKOUT
+========================= */
+
+function renderCheckout() {
+
+    const container =
+        document.getElementById('checkoutItems');
+
+    container.innerHTML = '';
+
+    let total = 0;
+
+
+    for (let key in cart) {
+
+        const item = cart[key];
+
+        const toppingCost =
+            item.toppings.length * 3000;
+
+        const hargaSatuan =
+            item.harga + toppingCost;
+
+        const subtotal =
+            hargaSatuan * item.qty;
+
+        total += subtotal;
+
+
+        const toppingText =
+            item.toppings.length
+            ? 'Topping: ' +
+              item.toppings.join(', ') +
+              ' (+Rp ' +
+              toppingCost.toLocaleString('id-ID') +
+              ')'
+            : 'Tanpa topping';
+
+
+        const div =
+            document.createElement('div');
+
+        div.className =
+            'checkout-item';
+
+
+        div.innerHTML = `
+
+            <div class="checkout-item-info">
+
+                <div class="checkout-item-name">
+                    ${item.nama}
+                </div>
+
+                <div class="checkout-item-topping">
+                    ${toppingText}
+                </div>
+
+                <div class="checkout-item-price">
+                    Rp ${hargaSatuan.toLocaleString('id-ID')}
+                    / item
+                </div>
+
+                <div class="checkout-controls">
+
+                    <button
+                        class="minus"
+                        onclick="changeCheckoutQty('${escapeText(item.nama)}','${escapeText(key)}',-1)">
+                        −
+                    </button>
+
+                    <strong>
+                        ${item.qty}
+                    </strong>
+
+                    <button
+                        class="plus"
+                        onclick="changeCheckoutQty('${escapeText(item.nama)}','${escapeText(key)}',1)">
+                        +
+                    </button>
+
+                    <button
+                        class="delete"
+                        onclick="deleteCheckoutItem('${escapeText(key)}')">
+                        🗑️ Hapus
+                    </button>
+
+                </div>
+
+            </div>
+
+            <strong>
+                Rp ${subtotal.toLocaleString('id-ID')}
+            </strong>
+
+        `;
+
+        container.appendChild(div);
+
+    }
+
+
+    document.getElementById('checkoutTotal')
+        .innerText =
+        total.toLocaleString('id-ID');
+
+
+    if (
+        Object.keys(cart).length === 0
+    ) {
+
+        container.innerHTML = `
+            <div class="checkout-empty">
+                🛒 Keranjang kosong.
+                <br><br>
+                Silakan kembali berbelanja.
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   ESCAPE TEXT
+========================= */
+
+function escapeText(text) {
+
+    return text
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'");
+
+}
+
+
+/* =========================
+   UBAH QTY DI CHECKOUT
+========================= */
+
+function changeCheckoutQty(
+    nama,
+    key,
+    delta
+) {
+
+    if (!cart[key]) {
+        return;
+    }
+
+
+    cart[key].qty += delta;
+
+
+    if (cart[key].qty <= 0) {
+        delete cart[key];
+    }
+
+
+    renderCart();
+    renderCheckout();
+
+
+    if (
+        Object.keys(cart).length === 0
+    ) {
+
+        closeCheckout();
+
+    }
+
+}
+
+
+/* =========================
+   HAPUS ITEM
+========================= */
+
+function deleteCheckoutItem(key) {
+
+    if (!cart[key]) {
+        return;
+    }
+
+
+    const nama =
+        cart[key].nama;
+
+
+    const yakin =
+        confirm(
+            'Hapus ' +
+            nama +
+            ' dari pesanan?'
+        );
+
+
+    if (!yakin) {
+        return;
+    }
+
+
+    delete cart[key];
+
+
+    renderCart();
+    renderCheckout();
+
+
+    if (
+        Object.keys(cart).length === 0
+    ) {
+
+        alert(
+            'Semua pesanan sudah dihapus.'
+        );
+
+        closeCheckout();
+
+    }
+
+}
+
+
+/* =========================
+   KONFIRMASI
+========================= */
+
+function confirmOrder() {
+
+    if (
+        Object.keys(cart).length === 0
+    ) {
+
+        alert('Pesanan kosong.');
+        return;
+
+    }
+
+
+    let html = '';
+    let total = 0;
+
+
+    for (let key in cart) {
+
+        const item = cart[key];
+
+        const toppingCost =
+            item.toppings.length * 3000;
+
+        const subtotal =
+            (
+                item.harga +
+                toppingCost
+            ) * item.qty;
+
+
+        total += subtotal;
+
+
+        const toppingText =
+            item.toppings.length
+            ? ` + ${item.toppings.join(', ')}`
+            : '';
+
+
+        html += `
+
+            <div style="
+                padding:10px 0;
+                border-bottom:1px solid #ddd;
+            ">
+
+                <strong>
+                    ${item.nama}
+                </strong>
+
+                ${toppingText}
+
+                <br>
+
+                Jumlah:
+                ${item.qty}
+
+                <br>
+
+                Rp ${subtotal.toLocaleString('id-ID')}
+
+            </div>
+
+        `;
+
+    }
+
+
+    document.getElementById(
+        'confirmationOrder'
+    ).innerHTML = html;
+
+
+    document.getElementById(
+        'confirmationTotal'
+    ).innerText =
+        total.toLocaleString('id-ID');
+
+
+    document.getElementById(
+        'checkoutModal'
+    ).classList.remove('show');
+
+
+    document.getElementById(
+        'confirmationScreen'
+    ).classList.add('show');
+
+}
+
+
+/* =========================
+   EDIT PESANAN
+========================= */
+
+function backToCheckout() {
+
+    document.getElementById(
+        'confirmationScreen'
+    ).classList.remove('show');
+
+
+    document.getElementById(
+        'checkoutModal'
+    ).classList.add('show');
+
+
+    renderCheckout();
+
+}
+
+
+/* =========================
+   KIRIM WHATSAPP
+========================= */
+
+function sendToWhatsApp() {
+
+    if (
+        Object.keys(cart).length === 0
+    ) {
+
+        alert(
+            'Pesanan kosong.'
+        );
+
+        return;
+
     }
 
 
@@ -1193,8 +2179,9 @@ function checkout() {
 
 
         const toppingText =
-            item.toppings.length > 0
-            ? ' + ' + item.toppings.join(', ')
+            item.toppings.length
+            ? ' + ' +
+              item.toppings.join(', ')
             : '';
 
 
@@ -1203,8 +2190,10 @@ function checkout() {
 
 
         const subtotal =
-            (item.harga + toppingCost)
-            * item.qty;
+            (
+                item.harga +
+                toppingCost
+            ) * item.qty;
 
 
         pesan +=
@@ -1227,17 +2216,8 @@ function checkout() {
         '\n💰 Total: Rp ' +
         total.toLocaleString('id-ID') +
         '\n\n' +
-        'Terima kasih!';
+        'Mohon konfirmasi pesanan saya. Terima kasih!';
 
-
-    /*
-       NOMOR WHATSAPP TEHNESIA
-
-       Format Indonesia:
-       08xxxxxxxxxx
-       menjadi
-       628xxxxxxxxxx
-    */
 
     const nomor =
         '6285704076736';
