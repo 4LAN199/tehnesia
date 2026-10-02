@@ -567,27 +567,27 @@ Rp 30.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
 
 <div class="qty">
 
-<button onclick="changeQty('Thai Tea',28000,-1,this)">
+<button onclick="changeQty('Thai Tea',30000,-1,this)">
 −
 </button>
 
 <span id="qty-Thai Tea">0</span>
 
-<button onclick="changeQty('Thai Tea',28000,1,this)">
+<button onclick="changeQty('Thai Tea',30000,1,this)">
 +
 </button>
 
@@ -622,14 +622,14 @@ Rp 25.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -677,14 +677,14 @@ Rp 35.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -732,14 +732,14 @@ Rp 30.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -787,14 +787,14 @@ Rp 38.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -842,14 +842,14 @@ Rp 32.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -897,14 +897,14 @@ Rp 30.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -952,14 +952,14 @@ Rp 33.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -1007,14 +1007,14 @@ Rp 25.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -1062,14 +1062,14 @@ Rp 27.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -1117,14 +1117,14 @@ Rp 29.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -1172,14 +1172,14 @@ Rp 30.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -1227,14 +1227,14 @@ Rp 30.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -1282,14 +1282,14 @@ Rp 28.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -1337,14 +1337,14 @@ Rp 28.000
 
 <label>
 <input type="checkbox" value="Boba">
-Boba (+3k)
+Boba (+2k)
 </label>
 
 <br>
 
 <label>
 <input type="checkbox" value="added sugar">
-added sugar (+3k)
+added sugar (+1k)
 </label>
 
 </div>
@@ -1544,6 +1544,22 @@ function getToppings(btn) {
     return toppings;
 }
 
+/* =========================
+   HITUNG BIAYA TOPPING
+========================= */
+
+function calculateToppingCost(toppings) {
+    let cost = 0;
+    toppings.forEach(function(topping) {
+        if (topping === 'Boba') {
+            cost += 2000;
+        } else if (topping === 'added sugar') {
+            cost += 1000;
+        }
+    });
+    return cost;
+}
+
 
 /* =========================
    ANIMASI KE KERANJANG
@@ -1663,7 +1679,7 @@ function renderCart() {
         const item = cart[key];
 
         const toppingCost =
-            item.toppings.length * 3000;
+            calculateToppingCost(item.toppings);
 
         const subtotal =
             (item.harga + toppingCost) *
@@ -1823,7 +1839,7 @@ function renderCheckout() {
         const item = cart[key];
 
         const toppingCost =
-            item.toppings.length * 3000;
+            calculateToppingCost(item.toppings);
 
         const hargaSatuan =
             item.harga + toppingCost;
@@ -1834,13 +1850,15 @@ function renderCheckout() {
         total += subtotal;
 
 
+        let toppingDetailText = [];
+        item.toppings.forEach(function(t) {
+            if (t === 'Boba') toppingDetailText.push('Boba (+Rp 2.000)');
+            if (t === 'added sugar') toppingDetailText.push('added sugar (+Rp 1.000)');
+        });
+
         const toppingText =
-            item.toppings.length
-            ? 'Topping: ' +
-              item.toppings.join(', ') +
-              ' (+Rp ' +
-              toppingCost.toLocaleString('id-ID') +
-              ')'
+            toppingDetailText.length
+            ? 'Topping: ' + toppingDetailText.join(', ')
             : 'Tanpa topping';
 
 
@@ -2055,7 +2073,7 @@ function confirmOrder() {
         const item = cart[key];
 
         const toppingCost =
-            item.toppings.length * 3000;
+            calculateToppingCost(item.toppings);
 
         const subtotal =
             (
@@ -2067,9 +2085,15 @@ function confirmOrder() {
         total += subtotal;
 
 
+        let toppingDetailText = [];
+        item.toppings.forEach(function(t) {
+            if (t === 'Boba') toppingDetailText.push('Boba (+2k)');
+            if (t === 'added sugar') toppingDetailText.push('added sugar (+1k)');
+        });
+
         const toppingText =
-            item.toppings.length
-            ? ` + ${item.toppings.join(', ')}`
+            toppingDetailText.length
+            ? ` + ${toppingDetailText.join(', ')}`
             : '';
 
 
@@ -2178,15 +2202,20 @@ function sendToWhatsApp() {
         const item = cart[key];
 
 
+        let toppingDetailText = [];
+        item.toppings.forEach(function(t) {
+            if (t === 'Boba') toppingDetailText.push('Boba (+2k)');
+            if (t === 'added sugar') toppingDetailText.push('added sugar (+1k)');
+        });
+
         const toppingText =
-            item.toppings.length
-            ? ' + ' +
-              item.toppings.join(', ')
+            toppingDetailText.length
+            ? ' + ' + toppingDetailText.join(', ')
             : '';
 
 
         const toppingCost =
-            item.toppings.length * 3000;
+            calculateToppingCost(item.toppings);
 
 
         const subtotal =
